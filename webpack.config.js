@@ -1,0 +1,19 @@
+const path = require('path');
+
+module.exports = {
+    entry: path.join(__dirname, './client/src/index.jsx'),
+    output: {
+        path: path.joing(__dirname, './client/dist'),
+        filename: 'bundle.js'
+    },
+    modules: {
+        rules: {
+            test: /\.jsx?/,
+            include: path.join(__dirname, './client/src'),
+            loader: 'babel-loader',
+            query: [{
+                presets = ['react', 'es2015'],
+            }]
+        }
+    }
+}
