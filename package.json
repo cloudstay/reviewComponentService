@@ -10,7 +10,8 @@
   },
   "scripts": {
     "rstart": "webpack -d --watch",
-    "nstart": "nodemon server/server.js"
+    "nstart": "nodemon server/server.js",
+    "test": "jest"
   },
   "dependencies": {
     "babel-core": "^6.26.3",
