@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-// const router = require('./routes');
+const router = require('./routes');
 
 const port = 3004;
 
@@ -16,11 +16,11 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static(__dirname + '../public'));
 
-app.get('/api', function(req, res) {
-    res.send('hello');
-});
+// app.get('/api', function(req, res) {
+//     res.send('hello');
+// });
 
-// app.use('/api', router);
+app.use('/api', router);
 
 app.listen(port, function() {
     console.log(`Listening on port: ${port}`);
