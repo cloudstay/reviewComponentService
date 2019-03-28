@@ -10,5 +10,13 @@ jobs:
 
     steps: 
       - checkout
-      - run: npm install
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run: 
+          name: Install all dependencies
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
       # - run: npm run nstart
