@@ -8,7 +8,10 @@
   "engines": {
     "node": ">=6.13.0"
   },
-  "scripts": {},
+  "scripts": {
+    "rstart": "webpack -d --watch",
+    "nstart": "nodemon server/server.js"
+  },
   "dependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.5",

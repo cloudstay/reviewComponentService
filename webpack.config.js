@@ -6,14 +6,14 @@ module.exports = {
         path: path.joing(__dirname, './client/dist'),
         filename: 'bundle.js'
     },
-    modules: {
-        rules: {
+    module: {
+        rules: [{
             test: /\.jsx?/,
             include: path.join(__dirname, './client/src'),
             loader: 'babel-loader',
-            query: [{
-                presets = ['react', 'es2015'],
-            }]
-        }
+            query: {
+                presets: ['react', 'es2015'],
+            }
+        }]
     }
 }

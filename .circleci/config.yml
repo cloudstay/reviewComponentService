@@ -2,10 +2,10 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:11.7.0
+      - image: circleci/node:7.10
     working_directory: ~/server
 
     steps: 
       - checkout
       - run: npm install
-      - run: npm nstart
+      - run: npm run nstart
