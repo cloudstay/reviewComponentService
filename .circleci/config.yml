@@ -19,4 +19,6 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - node_modules
-      # - run: npm run nstart
+      - run: 
+          name: Run jest tests
+          command: npm run test
