@@ -3,7 +3,9 @@ const models = require('./models');
 module.exports = {
     rooms: {
         get: function(req,res) {
-            models.rooms.get(function(err, result) {
+            var params = req.query.id;
+       
+            models.rooms.get(params, function(err, result) {
                 if(err) {
                     console.log('Error');
                 }
@@ -12,3 +14,7 @@ module.exports = {
         }
     }
 }
+
+// var typeA = [true, false]
+
+// typeA[Math.floor(Math.random() * 2)]

@@ -11,6 +11,7 @@
   "scripts": {
     "rstart": "webpack -d --watch",
     "nstart": "nodemon server/server.js",
+    "seed": "node server/db/seed.js",
     "test": "jest"
   },
   "dependencies": {
@@ -30,7 +31,8 @@
     "path": "^0.12.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-redux": "^6.0.1"
+    "react-redux": "^6.0.1",
+    "supertest": "^4.0.2"
   },
   "devDependencies": {
     "enzyme": "^3.9.0",
