@@ -12,7 +12,7 @@
     "rstart": "webpack -d --watch",
     "nstart": "nodemon server/server.js",
     "seed": "node server/db/seed.js",
-    "test": "jest --detectOpenHandles"
+    "test": "jest"
   },
   "dependencies": {
     "aws-sdk": "^2.431.0",
