@@ -30,7 +30,7 @@ describe('Test the root path', function() {
 });
 
 describe('Test filtering database by listing_id', function() {
-    var dbURL = 'mongodb://127.0.0.1:27017/rooms';
+    var dbURL = 'mongodb://localhost:27017/rooms';
 
     beforeAll(function() {
         mongoose.connect(dbURL);
