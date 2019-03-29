@@ -1,15 +1,9 @@
-const server = require('../server');
+const request = require('supertest');
+const app = require('../server');
 
-describe('', function() {
-    beforeEach(function(done) {
-
-    })
-
-    afterEach(function() {
-
-    })
-    
-    test('', function() {
-        expect().toBe()
+describe('Test the root path', function() {
+   
+    test('Should output statuscode of 200 to GET request', function() {
+        return request(app).get('/api/rooms').expect(200);
     })
 })
