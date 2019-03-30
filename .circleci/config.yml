@@ -5,7 +5,8 @@ jobs:
       only:
         - wip
     docker:
-      - image: circleci/node:11.7.0
+      - image: circleci/node:10.0.0
+      - image: mongo:3.4.4
     working_directory: ~/server
 
     steps: 
@@ -19,6 +20,9 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - node_modules
+      - run: 
+          name: Run seeding
+          command: npm run seed
       - run: 
           name: Run jest tests
           command: npm run test

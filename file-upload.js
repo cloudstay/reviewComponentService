@@ -10,7 +10,6 @@ aws.config.update({
     secretAccessKey: config.secretAccessKey,
 
     region: 'us-west-1'
-
 })
 
 const s3 = new aws.S3();

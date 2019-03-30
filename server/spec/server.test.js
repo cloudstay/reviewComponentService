@@ -1,8 +1,19 @@
 const express = require('express');
 const request = require('supertest');
 
-const mongoose = require('mongoose');
 const Reviews = require('../db/schema')
+
+describe('Test sum of two numbers', function() {
+    var sum = function(x, y) {
+        return x + y;
+    }
+
+    test('Should output the sum of the two inputs', function(done) {
+        expect(sum(3, 4)).toBe(7);
+        expect(sum(14, 15)).toBe(29);
+        done();
+    })
+})
 
 describe('Test the root path', function() {
     var app = express();
@@ -12,7 +23,7 @@ describe('Test the root path', function() {
         server = app.listen(4004);
     });
 
-    afterAll(async function() {
+    afterAll(function() {
         server.close();
     });
 
@@ -29,49 +40,36 @@ describe('Test the root path', function() {
     });
 });
 
-describe('Test filtering database by listing_id', function() {
-    var dbURL = 'mongodb://localhost:27017/rooms';
+describe('Test identifying the data type of Reviews Schema', function() {
+    
+    test('Should identify Reviews Schema as an object', function(done) {
 
-    beforeAll(function() {
-        mongoose.connect(dbURL);
-    })
-
-    afterAll(function() {
-        mongoose.disconnect();
-    })
-
-    test('Should only output documents with given listing_id', function(done) {
-        var params = 171;
-
-        Reviews.findOne({listing_id: params}).exec(function(err, result) {
-            if(err) {
-                done(err)
-            }
-            expect(result).toBeDefined();
-            done();
+        expect(typeof new Reviews).toBe('object');
+        done();
         });
     });
 
-    test('Should not output documents when given listing_id out of range', function(done) {
-        var params = 300;
+describe('Test determining properties on the Reviews Schema', function() {
+    
+    test('Should have a property of body', function(done) {
+    
+        expect(new Reviews).toHaveProperty('body');
+        done();
+        });
+    });
 
-        Reviews.findOne({listing_id: params}).exec(function(err, result) {
+
+describe('Test that database is seeded', function() {
+    var data;
+    
+    test('Should return result to be truthy', function(done) {
+
+        Reviews.find().exec(function(err, result) {
             if(err) {
-                done(err)
+                done(err);
             }
-            expect(result).toBeNull();
+            expect(result).toBeTruthy();
             done();
         });
     });
 });
-
-// describe('Test filtering database by word in body', function() {
-
-//     test('', function(done) {
-//         done();
-//     });
-
-//     test('', function(done) {
-//         done();
-//     });
-// });
