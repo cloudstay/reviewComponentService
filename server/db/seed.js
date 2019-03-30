@@ -1,12 +1,12 @@
 const Reviews = require('./schema');
 const faker = require('faker');
 
-const createData = function() {
+const createData = async function() {
 
     for(var i = 100; i < 200; i++) {
         var str = i.toString();
        
-        var inputs = Math.ceil(Math.random() * 500);
+        var inputs = Math.ceil(Math.random() * 2);
          
         for(var j = 0; j < inputs; j++) {
             var Review = new Reviews({
@@ -23,7 +23,7 @@ const createData = function() {
                 value_rating: Math.floor(Math.random() * 6)
             })
          
-            Review.save(function(err, result) {
+            await Review.save(function(err, result) {
                 if(err) {
                     console.log('Error loading data')
                 } else {
@@ -37,3 +37,5 @@ const createData = function() {
 createData();
 
 module.exports = createData;
+
+
