@@ -59,17 +59,3 @@ describe('Test determining properties on the Reviews Schema', function() {
     });
 
 
-describe('Test that database is seeded', function() {
-    var data;
-    
-    test('Should return result to be truthy', function(done) {
-
-        Reviews.find().exec(function(err, result) {
-            if(err) {
-                done(err);
-            }
-            expect(result).toBeTruthy();
-            done();
-        });
-    });
-});
