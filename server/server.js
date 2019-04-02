@@ -16,10 +16,6 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static(__dirname + '../public'));
 
-// app.get('/api', function(req, res) {
-//     res.send('hello');
-// });
-
 app.use('/api', router);
 
 app.listen(port, function() {
