@@ -3,7 +3,7 @@ import ReviewListEntry from './reviewListEntry.jsx';
 
 const ReviewList = (props) => (
     <div>
-        {props.reviews.map((review) => (
+        {props.currentReviews.map((review) => (
             <ReviewListEntry review={review}/>
         ))}
     </div>
