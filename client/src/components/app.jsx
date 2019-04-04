@@ -15,6 +15,7 @@ class App extends React.Component {
             id: 188,
             length: 0,
             reviews: [],
+            fixed_reviews: [],
             search: '',
             isActive: false,
             isHidden: true,
@@ -33,6 +34,7 @@ class App extends React.Component {
             success: (data) => {
                 this.setState({
                     reviews: data,
+                    fixed_reviews: data,
                     length: data.length,
                 })
                 this.initialState = this.state
@@ -114,14 +116,53 @@ class App extends React.Component {
             <button id="one_page_button" onClick={() => this.handleClick(number)}><div id={(this.state.activePage === number) ? "one_page_div" : ""}>{number}</div></button>
         ))
 
+        // Average rating
+        const average = () => {
+            var ratings = this.state.fixed_reviews.length * 6;
+        
+            var avg = 0;
+            var sum = 0;
+        
+            for(var i = 0; i < this.state.length; i++) {
+                sum += parseInt(this.state.fixed_reviews[i].accuracy_rating);
+                sum += parseInt(this.state.fixed_reviews[i].communication_rating);
+                sum += parseInt(this.state.fixed_reviews[i].cleanliness_rating);
+                sum += parseInt(this.state.fixed_reviews[i].location_rating);
+                sum += parseInt(this.state.fixed_reviews[i].check_in_rating);
+                sum += parseInt(this.state.fixed_reviews[i].value_rating);
+            }
+            
+            avg = sum/ratings;
+            return avg;
+        }
+
+        // Creating star visualization of averages
+        const starFill = (avg) => {
+            const arr = [];
+            
+            for(var i = 0; i < 5; i++) {
+                if(avg >= 1) {
+                    arr.push(`<span id="average_star_1"></span>`)
+                    avg = avg - 1;
+                } else if(avg > 0) {
+                    arr.push(`<span id="average_star_2"></span>`)
+                    avg = avg - avg;
+                } else {
+                    arr.push(`<span id="average_star_3"></span>`)
+                }
+            }
+            const newStr = arr.join('');
+            return <span>{ReactHtmlParser(newStr)}</span>;
+        }
+
         // Returns the components
         return (
             <div>
                 <div id="summary_container">
                     <div id="summary_reviews_container">
-                        <span>{this.state.length} Reviews</span>
+                        <span id="title">{this.state.length} Reviews</span>
                         <span id="star_container">
-                            <span id="average_star_1"> </span><span id="average_star_2"> </span><span id="average_star_3"> </span><span id="average_star_4"> </span><span id="average_star_5"> </span>
+                            {starFill(average())}
                         </span>
                     </div>
 
@@ -134,7 +175,7 @@ class App extends React.Component {
                     </div>
                 </div>
 
-                <div style={this.state.isHidden ? {display: "block"} : {display: "none"}}><AverageRatings reviews={this.state.reviews}/></div>
+                <div style={this.state.isHidden ? {display: "block"} : {display: "none"}}><AverageRatings reviews={this.state.reviews} starFill={starFill.bind(this)}/></div>
                 
                 <div id="results_container" style={this.state.isActive ? {display: "block"} : {display: "none"}}>
                     <span id="found_results_comment">{ReactHtmlParser(this.state.commentFound)}</span> 

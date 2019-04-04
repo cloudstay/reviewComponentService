@@ -9,17 +9,17 @@ describe('Renders component', function() {
         const wrapper = shallow(<App />);
         
         expect(wrapper.exists()).toBe(true);
-    })
-})
+    });
+});
 
 describe('Has title that contains Reviews', function() {
     var wrapper; 
 
     test('Title', function() {
         wrapper = mount(<App />);
-        expect(wrapper.find('#summary_reviews_container').text()).toContain('Reviews')
-    })
-})
+        expect(wrapper.find('#summary_reviews_container').text()).toContain('Reviews');
+    });
+});
 
 describe('Finds the number of specific button on the page', function() {
     test('Finds', function() {
@@ -27,16 +27,16 @@ describe('Finds the number of specific button on the page', function() {
 
         expect(wrapper.find('#forward_button').length).toBe(1);
         expect(wrapper.find('#one_page_button').length).toBe(0);
-    })
-})
+    });
+});
 
 describe('Tests that less than 7 reviews render on the page at a time', function() {
     test('Tests', function() {
         const wrapper = shallow(<App />);
 
         expect(wrapper.find('#review_list').length).toBeLessThan(7);
-    })
-})   
+    });
+});   
 
 describe('Searches footer', function() {
     var wrapper;
@@ -44,13 +44,13 @@ describe('Searches footer', function() {
 
     beforeEach(() => {
         wrapper = mount(<App />);
-        search = wrapper.find('#footer_container')
-    })
+        search = wrapper.find('#footer_container');
+    });
 
     test('Starts out hidden', function() {
         expect(search.hasClass('isHiddenFooter')).toBeFalsy();
-    })
-})
+    });
+});
     
 describe('', function() {
     const wrapper = shallow(<App />);
@@ -63,6 +63,6 @@ describe('', function() {
         wrapper.update();
     
         expect(search).toEqual(1); 
-    })
-})
+    });
+});
         
