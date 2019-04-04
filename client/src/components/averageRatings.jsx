@@ -11,7 +11,6 @@ const AverageRatings = (props) => {
 
     var average = 0;
 
-    console.log(props.reviews)
     for(var i = 0; i < length; i++ ) {
         avgAccuracy += parseInt(props.reviews[i].accuracy_rating);
         avgCommunication += parseInt(props.reviews[i].communication_rating);

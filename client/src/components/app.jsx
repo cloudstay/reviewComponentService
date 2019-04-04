@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import ReactHtmlParser from 'react-html-parser';
 import AverageRatings from './averageRatings.jsx';
 import ReviewList from './reviewList.jsx';
 
@@ -9,18 +10,22 @@ class App extends React.Component {
 
         this.state = {
             back: '',
-            comment: '',
+            commentNone: '',
+            commentFound: '',
             id: 188,
             length: 0,
             reviews: [],
             search: '',
+            isActive: false,
             isHidden: true,
+            isHiddenFooter: true,
 
             activePage: 1,
             reviewsPerPage: 6,
         }
     }
 
+    // GET Request to obtain all reviews
     componentDidMount() {
         $.ajax({
             url: `http://127.0.0.1:3004/api/rooms?id=${this.state.id}`,
@@ -41,6 +46,7 @@ class App extends React.Component {
         })
     }
 
+    // GET Request to obtain reviews containing filter word
     handleSubmit(e) {
         if(e.keyCode === 13 && e.shiftKey === false) {
             $.ajax({
@@ -49,20 +55,39 @@ class App extends React.Component {
                 success: (data) => (
                     this.setState({
                         back: 'Back to all reviews',
-                        comment: data.length > 0 ? `` : `None of our guests have mentioned "${this.state.search}"`,
+                        commentNone: data.length > 0 ? `` : `None of our guests have mentioned "<b>${this.state.search}</b>"`,
+                        commentFound: data.length > 0 ? `${data.length} of our guests have mentioned "<b>${this.state.search}</b>"` : ``,
                         reviews: data,
-                        isHidden: data.length > 0 ? true : false,
+                        isActive: data.length > 0 ? true : false,
+                        isHidden: false,
+                        isHiddenFooter: data.length > 0 ? false : true,
                     })
                 )
             })
+            search_input.value = '';
         }
     }
 
+    // Change active page
     handleClick(number) {
         this.setState({
             activePage: Number(number)
         });
         window.scrollTo({top: 200, left: 0, behavior: 'smooth' });
+    }
+
+    // Change active page to previous
+    goBack() {
+        this.setState({
+            activePage: Number(this.state.activePage - 1)
+        })
+    }
+
+    // Change active page to upcoming
+    goForward() {
+        this.setState({
+            activePage: Number(this.state.activePage + 1)
+        })
     }
 
     handleRefresh() {
@@ -71,14 +96,13 @@ class App extends React.Component {
         )
     }
     
-
     render() {
         const indexOfLastReview = this.state.activePage * this.state.reviewsPerPage;
 
         const indexOfFirstReview = indexOfLastReview - this.state.reviewsPerPage;
 
         const currentReviews = this.state.reviews.slice(indexOfFirstReview, indexOfLastReview);
-        
+
         // Displaying page numbers
         const pageNumbers = [];
 
@@ -90,6 +114,7 @@ class App extends React.Component {
             <button id="one_page_button" onClick={() => this.handleClick(number)}><div id={(this.state.activePage === number) ? "one_page_div" : ""}>{number}</div></button>
         ))
 
+        // Returns the components
         return (
             <div>
                 <div id="summary_container">
@@ -107,18 +132,26 @@ class App extends React.Component {
                             <input id="search_input" type="text" placeholder="Search reviews" onChange={(e) => this.handleChange(e)} onKeyDown={(e) => this.handleSubmit(e)}/>
                         </div>
                     </div>
-
                 </div>
 
                 <div style={this.state.isHidden ? {display: "block"} : {display: "none"}}><AverageRatings reviews={this.state.reviews}/></div>
+                
+                <div id="results_container" style={this.state.isActive ? {display: "block"} : {display: "none"}}>
+                    <span id="found_results_comment">{ReactHtmlParser(this.state.commentFound)}</span> 
+                    <button id="refresh_button" onClick={() => this.handleRefresh()}>{this.state.back}</button>
+                </div>
 
-                <div><ReviewList currentReviews={currentReviews}/></div>
+                <div id="review_list"><ReviewList currentReviews={currentReviews} search={this.state.search} isActive={this.state.isActive}/></div>
 
 
-                <ul id="page_numbers" style={this.state.isHidden ? {display: "block"} : {display: "none"}}>{renderPageNumbers}</ul>
+                <ul id="page_numbers" style={this.state.isHidden ? {display: "block"} : {display: "none"}}>
+                    <button id="back_button" style={this.state.activePage === pageNumbers[0] ? {display: "none"} : {}} onClick={() => this.goBack()}><div id="back_div">{'<'}</div></button>
+                        {renderPageNumbers}
+                    <button id="forward_button" style={this.state.activePage === pageNumbers[pageNumbers.length - 1] ? {display: "none"} : {}} onClick={() => this.goForward()}><div id="forward_div">{'>'}</div></button>
+                </ul>
 
-                <div id="footer_container">
-                    <span id="results_comment">{this.state.comment}</span> 
+                <div id="footer_container" style={this.state.isHiddenFooter ? {display: "block"} : {display: "none"}}>
+                    <span id="none_results_comment">{ReactHtmlParser(this.state.commentNone)}</span> 
                     <button id="refresh_button" onClick={() => this.handleRefresh()}>{this.state.back}</button>
                 </div>
 
