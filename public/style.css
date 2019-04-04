@@ -24,13 +24,16 @@ body {
     padding-bottom: 2px;
 }
 
+#title {
+    margin-right: 20px;
+}
+
 #average_star_1 {
    height: 18px;
    width:18px;
    display: inline-block;
-   margin-left: 16px;
    margin-right: 6px;
-   background-image: url('../images/star.svg');
+   background-image: url('../images/star-fill.svg');
    background-position-x: 50%;
    background-position-y: 50%;
    background-repeat: no-repeat;
@@ -41,9 +44,8 @@ body {
     width:18px;
     display: inline-block;
     margin-right: 6px;
-    background-image: url('../images/star.svg');
-    background-position-x: 50%;
-    background-position-y: 50%;
+    background-image: url('../images/half-star-shape-r.svg'), url('../images/half-star-shape-l.svg');
+    background-position: 4.5px, -4.75px;
     background-repeat: no-repeat;
 }
 
@@ -52,29 +54,7 @@ body {
     width:18px;
     display: inline-block;
     margin-right: 6px;
-    background-image: url('../images/star.svg');
-    background-position-x: 50%;
-    background-position-y: 50%;
-    background-repeat: no-repeat;
-}
-
-#average_star_4 {
-    height: 18px;
-    width:18px;
-    display: inline-block;
-    margin-right: 6px;
-    background-image: url('../images/star.svg');
-    background-position-x: 50%;
-    background-position-y: 50%;
-    background-repeat: no-repeat;
-}
-
-#average_star_5 {
-    height: 18px;
-    width:18px;
-    display: inline-block;
-    margin-right: 6px;
-    background-image: url('../images/star.svg');
+    background-image: url('../images/star-empty.svg');
     background-position-x: 50%;
     background-position-y: 50%;
     background-repeat: no-repeat;
@@ -194,7 +174,7 @@ body {
 }
 
 #left_average_ratings {
-    width: 154px;
+    width: 164px;
     padding: 0px 2px;
     float: left;
     font-size: 16px;
@@ -204,7 +184,7 @@ body {
 }
 
 #right_average_ratings {
-    width: 154px;
+    width: 124px;
     padding: 0px 2px;
     float: left;
     font-size: 16px;
@@ -253,7 +233,7 @@ body {
 
 #left_average_star_container {
     float: left;
-    margin-right: 50px;
+    margin-right: 70px;
     display: inline-block;
     padding: 0px 2px;
     font-size: 16px;

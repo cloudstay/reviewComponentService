@@ -9,8 +9,6 @@ const AverageRatings = (props) => {
     var avgCheckin = 0;
     var avgValue = 0;
 
-    var average = 0;
-
     for(var i = 0; i < length; i++ ) {
         avgAccuracy += parseInt(props.reviews[i].accuracy_rating);
         avgCommunication += parseInt(props.reviews[i].communication_rating);
@@ -28,11 +26,9 @@ const AverageRatings = (props) => {
     avgCheckin = avgCheckin/length;
     avgValue = avgValue/length;
 
-    average = (avgAccuracy + avgCommunication + avgCleanliness + avgLocation + avgCheckin + avgValue)/6;
-
     return (
         <div> 
-            <div id="average_ratings_container">
+            <div id="average_ratings_container" >
                 <div id="left_average_ratings">
                     <div>Accuracy</div>
                     <div>Communication</div>
@@ -40,9 +36,9 @@ const AverageRatings = (props) => {
                 </div>
 
                 <div id="left_average_star_container">
-                    <div><span id="average_star_1"> </span><span id="average_star_2"> </span><span id="average_star_3"> </span><span id="average_star_4"> </span><span id="average_star_5"> </span></div>
-                    <div><span id="average_star_1"> </span><span id="average_star_2"> </span><span id="average_star_3"> </span><span id="average_star_4"> </span><span id="average_star_5"> </span></div>
-                    <div><span id="average_star_1"> </span><span id="average_star_2"> </span><span id="average_star_3"> </span><span id="average_star_4"> </span><span id="average_star_5"> </span></div>
+                    <div>{props.starFill(avgAccuracy)}</div>
+                    <div>{props.starFill(avgCommunication)}</div>
+                    <div>{props.starFill(avgCleanliness)}</div>
                 </div>
                 
                 <div id="right_average_ratings">
@@ -52,9 +48,9 @@ const AverageRatings = (props) => {
                 </div>
 
                 <div id="right_average_star_container">
-                    <div><span id="average_star_1"> </span><span id="average_star_2"> </span><span id="average_star_3"> </span><span id="average_star_4"> </span><span id="average_star_5"> </span></div>
-                    <div><span id="average_star_1"> </span><span id="average_star_2"> </span><span id="average_star_3"> </span><span id="average_star_4"> </span><span id="average_star_5"> </span></div>
-                    <div><span id="average_star_1"> </span><span id="average_star_2"> </span><span id="average_star_3"> </span><span id="average_star_4"> </span><span id="average_star_5"> </span></div>
+                    <div>{props.starFill(avgLocation)}</div>
+                    <div>{props.starFill(avgCheckin)}</div>
+                    <div>{props.starFill(avgValue)}</div>
                 </div>
             </div>
         </div>

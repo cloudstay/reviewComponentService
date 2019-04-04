@@ -1,7 +1,7 @@
 const express = require('express');
 const request = require('supertest');
 
-const Reviews = require('../db/schema')
+const Reviews = require('../db/schema');
 
 describe('Test sum of two numbers', function() {
     var sum = function(x, y) {
@@ -12,8 +12,8 @@ describe('Test sum of two numbers', function() {
         expect(sum(3, 4)).toBe(7);
         expect(sum(14, 15)).toBe(29);
         done();
-    })
-})
+    });
+});
 
 describe('Test the root path', function() {
     var app = express();
