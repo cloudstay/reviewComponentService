@@ -29,8 +29,9 @@ class App extends React.Component {
     // GET Request to obtain all reviews
     componentDidMount() {
         $.ajax({
-            url: `http://127.0.0.1:3004/api/rooms?id=${this.state.id}`,
+            url: `http://127.0.0.1:3004/rooms/api`,
             method: 'GET',
+            data: {id: this.state.id},
             success: (data) => {
                 this.setState({
                     reviews: data,
@@ -52,8 +53,11 @@ class App extends React.Component {
     handleSubmit(e) {
         if(e.keyCode === 13 && e.shiftKey === false) {
             $.ajax({
-                url: `http://127.0.0.1:3004/api/reviews?id=${this.state.id}&search=${this.state.search}`,
+                url: `http://127.0.0.1:3004/rooms/reviews`,
                 method: 'GET',
+                data: {id: this.state.id,
+                       search: this.state.search
+                      },
                 success: (data) => (
                     this.setState({
                         back: 'Back to all reviews',
