@@ -1,0 +1,24 @@
+version: 2
+jobs:
+  build:
+    branches:
+      only:
+        - wip
+    docker:
+      - image: circleci/node:10.0.0
+    working_directory: ~/server
+
+    steps: 
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run: 
+          name: Install all dependencies
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run: 
+          name: Run jest tests
+          command: npm run test

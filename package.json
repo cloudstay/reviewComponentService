@@ -1,17 +1,70 @@
 {
-  "name": "",
-  "version": "",
+  "name": "review-component",
+  "version": "1.0.0",
   "description": "",
+  "main": "server.js",
   "author": "",
-  "license": "",
+  "license": "ISC",
   "engines": {
     "node": ">=6.13.0"
   },
   "scripts": {
+    "rstart": "webpack -d --watch",
+    "nstart": "nodemon server/server.js",
+    "seed": "node server/db/seed.js",
+    "test": "jest"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.4.2",
+    "@babel/preset-react": "^7.0.0",
+    "aws-sdk": "^2.432.0",
+    "babel-jest": "^24.5.0",
+    "babel-loader": "^7.1.5",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "body-parser": "^1.18.3",
+    "bootstrap": "^4.3.1",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "jest-cli": "^24.5.0",
+    "jquery": "^3.3.1",
+    "moment": "^2.24.0",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.1",
+    "multer-s3": "^2.9.0",
+    "nodemon": "^1.18.10",
+    "path": "^0.12.7",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-html-parser": "^2.0.2",
+    "react-js-pagination": "^3.0.2",
+    "react-redux": "^6.0.1",
+    "request": "^2.88.0",
+    "supertest": "^4.0.2"
   },
   "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
+    "babel-core": "^6.26.3",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2",
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "faker": "^4.1.0",
+    "jest": "^24.5.0",
+    "mongodb": "^3.2.2",
+    "mongoose": "^5.4.20",
+    "puppeteer": "^1.14.0",
+    "puppeteer-core": "^1.14.0",
+    "redux-devtools": "^3.5.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
+  },
+  "jest": {
+    "verbose": true,
+    "transform": {
+      "^.+\\.jsx$": "babel-jest",
+      "^.+\\.js$": "babel-jest"
+    },
+    "setupFiles": [
+      "<rootDir>/client/src/setupTests.js"
+    ]
   }
 }
