@@ -12,7 +12,7 @@ class App extends React.Component {
             back: '',
             commentNone: '',
             commentFound: '',
-            id: 188,
+            id: window.location.search.slice(4,7),
             length: 0,
             reviews: [],
             fixed_reviews: [],
@@ -29,7 +29,7 @@ class App extends React.Component {
     // GET Request to obtain all reviews
     componentDidMount() {
         $.ajax({
-            url: `http://127.0.0.1:3004/rooms/api`,
+            url: `/rooms/api`,
             method: 'GET',
             data: {id: this.state.id},
             success: (data) => {
@@ -53,7 +53,7 @@ class App extends React.Component {
     handleSubmit(e) {
         if(e.keyCode === 13 && e.shiftKey === false) {
             $.ajax({
-                url: `http://127.0.0.1:3004/rooms/reviews`,
+                url: `/rooms/reviews`,
                 method: 'GET',
                 data: {id: this.state.id,
                        search: this.state.search

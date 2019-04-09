@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({
     extended: true,
 }))
 
-app.use('/rooms', express.static(__dirname + '../public'));
+app.use('/rooms', express.static('public'));
 
 app.use('/rooms', router);
 

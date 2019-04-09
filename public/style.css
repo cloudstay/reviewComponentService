@@ -33,7 +33,7 @@ body {
    width:18px;
    display: inline-block;
    margin-right: 6px;
-   background-image: url('../images/star-fill.svg');
+   background-image: url('./images/star-fill.svg');
    background-position-x: 50%;
    background-position-y: 50%;
    background-repeat: no-repeat;
@@ -44,7 +44,7 @@ body {
     width:18px;
     display: inline-block;
     margin-right: 6px;
-    background-image: url('../images/half-star-shape-r.svg'), url('../images/half-star-shape-l.svg');
+    background-image: url('./images/half-star-shape-r.svg'), url('./images/half-star-shape-l.svg');
     background-position: 4.5px, -4.75px;
     background-repeat: no-repeat;
 }
@@ -54,7 +54,7 @@ body {
     width:18px;
     display: inline-block;
     margin-right: 6px;
-    background-image: url('../images/star-empty.svg');
+    background-image: url('./images/star-empty.svg');
     background-position-x: 50%;
     background-position-y: 50%;
     background-repeat: no-repeat;
@@ -108,7 +108,7 @@ body {
     float: left;
     height: 100%;
     width: 17%;
-    background-image: url('../images/search.svg');
+    background-image: url('./images/search.svg');
     background-size: 15px;
     background-repeat: no-repeat;
     background-position-x: 50%;
