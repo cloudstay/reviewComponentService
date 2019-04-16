@@ -3,6 +3,7 @@ import $ from 'jquery';
 import ReactHtmlParser from 'react-html-parser';
 import AverageRatings from './averageRatings.jsx';
 import ReviewList from './reviewList.jsx';
+import '../style/style.css';
 
 class App extends React.Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class App extends React.Component {
             back: '',
             commentNone: '',
             commentFound: '',
-            id: window.location.search.slice(4,7),
+            id: window.location.pathname.split('/')[2],
             length: 0,
             reviews: [],
             fixed_reviews: [],
@@ -29,10 +30,10 @@ class App extends React.Component {
     // GET Request to obtain all reviews
     componentDidMount() {
         $.ajax({
-            url: `/rooms/api`,
+            url: `/api/rooms/${this.state.id}/reviews`,
             method: 'GET',
-            data: {id: this.state.id},
             success: (data) => {
+                data = JSON.parse(data);
                 this.setState({
                     reviews: data,
                     fixed_reviews: data,
@@ -53,12 +54,12 @@ class App extends React.Component {
     handleSubmit(e) {
         if(e.keyCode === 13 && e.shiftKey === false) {
             $.ajax({
-                url: `/rooms/reviews`,
+                url: `/api/rooms/${this.state.id}/searchReviews`,
                 method: 'GET',
-                data: {id: this.state.id,
-                       search: this.state.search
+                data: {search: this.state.search
                       },
-                success: (data) => (
+                success: (data) => {
+                    data = JSON.parse(data);
                     this.setState({
                         back: 'Back to all reviews',
                         commentNone: data.length > 0 ? `` : `None of our guests have mentioned "<b>${this.state.search}</b>"`,
@@ -68,7 +69,7 @@ class App extends React.Component {
                         isHidden: false,
                         isHiddenFooter: data.length > 0 ? false : true,
                     })
-                )
+                }
             })
             search_input.value = '';
         }
@@ -79,7 +80,7 @@ class App extends React.Component {
         this.setState({
             activePage: Number(number)
         });
-        window.scrollTo({top: 200, left: 0, behavior: 'smooth' });
+        window.scrollTo({top: 1700, left: 0, behavior: 'smooth' });
     }
 
     // Change active page to previous

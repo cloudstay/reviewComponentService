@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  review:
+    build: ./
+    depends_on: 
+      - 'reviewdatabase'
+    ports: 
+      - '3004:3004'
+
+  reviewdatabase: 
+    image: mongo:latest
+ 
+  mongo-seed:
+    build: ./
+    depends_on:
+      - 'reviewdatabase'
+    command: sh -c "npm run seed"
